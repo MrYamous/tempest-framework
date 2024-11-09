@@ -1,0 +1,37 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Tempest\Database\QueryStatements;
+
+use Tempest\Database\DatabaseDialect;
+use Tempest\Database\QueryStatement;
+
+final readonly class EnumStatement implements QueryStatement
+{
+    public function __construct(
+        private string $name,
+        private string $enumClass,
+        private bool $nullable = false,
+        private ?string $default = null,
+    ) {
+    }
+
+    public function compile(DatabaseDialect $dialect): string
+    {
+        $enumValues = self::getEnumValues($this->enumClass);
+
+        return sprintf(
+            '`%s` ENUM %s %s %s',
+            $this->name,
+            $enumValues,
+            $this->default ? "DEFAULT {$this->default}" : '',
+            $this->nullable ? '' : 'NOT NULL',
+        );
+    }
+
+    private function getEnumValues(string $enumClass): string
+    {
+        return '';
+    }
+}

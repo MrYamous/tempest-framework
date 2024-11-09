@@ -166,6 +166,22 @@ final class CreateTableStatement implements QueryStatement
         return $this;
     }
 
+    public function enum(
+        string $name,
+        string $enumClass,
+        bool $nullable = false,
+        ?bool $default = null
+    ): self {
+        $this->statements[] = new EnumStatement(
+            name: $name,
+            enumClass: $enumClass,
+            nullable: $nullable,
+            default: $default,
+        );
+
+        return $this;
+    }
+
     public function compile(DatabaseDialect $dialect): string
     {
         $compiled = sprintf(
