@@ -11,7 +11,7 @@ The `tempest/idempotency` package solves this by storing the result of the first
 
 ## Idempotent routes
 
-Add the {b`Tempest\Idempotency\Attributes\Idempotent`} attribute to a controller method. Clients send an `Idempotency-Key` header with a unique value (typically a UUID). The first request executes normally and caches the response. Subsequent requests with the same key replay the cached response without re-executing the handler.
+Add the {b`Tempest\Idempotency\Attributes\Idempotent`} attribute to a controller method. Clients send an `{txt}{:hlvalueproperty:Idempotency-Key:}` header with a unique value (typically a UUID). The first request executes normally and caches the response. Subsequent requests with the same key replay the cached response without re-executing the handler.
 
 ```php app/OrderController.php
 use Tempest\Router\Post;
@@ -46,7 +46,7 @@ Content-Type: application/json
 {"product": "widget", "quantity": 3}
 ```
 
-When a cached response is replayed, the response includes an `idempotency-replayed: true` header so the client can distinguish replays from original executions.
+When a cached response is replayed, the response includes an `{:hl-property:idempotency-replayed:}: true` header so the client can distinguish replays from original executions.
 
 ### Supported methods
 
@@ -103,19 +103,19 @@ final readonly class PaymentController
 
 #### `#[Idempotent]` parameters
 
-| Parameter | Type | Description |
-|---|---|---|
-| `ttlInSeconds` | `?int` | How long a completed response is cached. Defaults to the config value (86400 / 24 hours). |
-| `pendingTtlInSeconds` | `?int` | How long a pending (in-progress) record is considered active. Defaults to the config value (60 seconds). |
+| Parameter                             | Type               | Description                                                                                              |
+|---------------------------------------|--------------------|----------------------------------------------------------------------------------------------------------|
+| `{:hl-property:ttlInSeconds:}`        | `{:hl-type:?int:}` | How long a completed response is cached. Defaults to the config value (86400 / 24 hours).                |
+| `{:hl-property:pendingTtlInSeconds:}` | `{:hl-type:?int:}` | How long a pending (in-progress) record is considered active. Defaults to the config value (60 seconds). |
 
 #### `#[IdempotentRoute]` parameters
 
-| Parameter | Type | Description |
-|---|---|---|
-| `requireKey` | `?bool` | Whether requests without the idempotency key header should be rejected with a 400 response. Defaults to `true`. |
-| `header` | `?string` | The header name to read the idempotency key from. Defaults to `Idempotency-Key`. |
+| Parameter                    | Type                  | Description                                                                                                     |
+|------------------------------|-----------------------|-----------------------------------------------------------------------------------------------------------------|
+| `{:hl-property:requireKey:}` | `{:hl-type:?bool:}`   | Whether requests without the idempotency key header should be rejected with a 400 response. Defaults to `true`. |
+| `{:hl-property:header:}`     | `{:hl-type:?string:}` | The header name to read the idempotency key from. Defaults to `{txt}{:hl-value:Idempotency-Key:}`.              |
 
-When `requireKey` is set to `false`, requests without the header bypass idempotency protection entirely and execute normally.
+When `{:hl-property:requireKey:}` is set to `false`, requests without the header bypass idempotency protection entirely and execute normally.
 
 ### Class-level application
 
@@ -142,13 +142,13 @@ final readonly class ApiOrderController
 
 The middleware produces different responses depending on the state of the idempotency key:
 
-| Scenario | Status | Description |
-|---|---|---|
-| No existing record |  -  | The request executes normally and the response is cached. |
-| Completed record, same payload | Original status | The cached response is replayed with an `idempotency-replayed: true` header. |
-| Completed record, different payload | 422 | The key was already used with a different request body. |
-| Pending record (in progress) | 409 | Another request with the same key is currently being processed. A `retry-after: 1` header is included. |
-| Missing key (when required) | 400 | The `Idempotency-Key` header was not provided. |
+| Scenario                            | Status          | Description                                                                                                            |
+|-------------------------------------|-----------------|------------------------------------------------------------------------------------------------------------------------|
+| No existing record                  | -               | The request executes normally and the response is cached.                                                              |
+| Completed record, same payload      | Original status | The cached response is replayed with an `{:hl-property:idempotency-replayed:}: true` header.                           |
+| Completed record, different payload | `422`           | The key was already used with a different request body.                                                                |
+| Pending record (in progress)        | `409`           | Another request with the same key is currently being processed. A `{:hl-property:retry-after:}: 1` header is included. |
+| Missing key (when required)         | `400`           | The `{txt}{:hl-value:Idempotency-Key:}` header was not provided.                                                       |
 
 ### How it works
 
@@ -238,10 +238,10 @@ The `#[Idempotent]` attribute accepts the same optional TTL parameters for comma
 final readonly class ProcessPaymentCommand { /* … */ }
 ```
 
-| Parameter | Type | Description |
-|---|---|---|
-| `ttlInSeconds` | `?int` | How long the completed record is cached. Defaults to the config value (86400 / 24 hours). |
-| `pendingTtlInSeconds` | `?int` | How long a pending record is considered active. Defaults to the config value (60 seconds). |
+| Parameter                             | Type               | Description                                                                                |
+|---------------------------------------|--------------------|--------------------------------------------------------------------------------------------|
+| `{:hl-property:ttlInSeconds:}`        | `{:hl-type:?int:}` | How long the completed record is cached. Defaults to the config value (86400 / 24 hours).  |
+| `{:hl-property:pendingTtlInSeconds:}` | `{:hl-type:?int:}` | How long a pending record is considered active. Defaults to the config value (60 seconds). |
 
 ## Configuration
 
@@ -259,14 +259,14 @@ return new IdempotencyConfig(
 );
 ```
 
-| Parameter | Default | Description |
-|---|---|---|
-| `header` | `Idempotency-Key` | The HTTP header name to read the idempotency key from. |
-| `requireKey` | `true` | Whether to reject requests that do not include the idempotency key header. |
-| `ttlInSeconds` | `86400` (24h) | How long a completed response is cached. |
-| `pendingTtlInSeconds` | `60` | How long a pending record is considered active before it can be taken over. |
-| `cachePrefix` | `idempotency` | Prefix for cache keys in the idempotency store. |
-| `storeClass` | `CacheIdempotencyStore` | The {b`Tempest\Idempotency\Store\IdempotencyStore`} implementation to use. |
+| Parameter                             | Default                             | Description                                                                 |
+|---------------------------------------|-------------------------------------|-----------------------------------------------------------------------------|
+| `{:hl-property:header:}`              | `{txt}{:hl-value:Idempotency-Key:}` | The HTTP header name to read the idempotency key from.                      |
+| `{:hl-property:requireKey:}`          | `{:hl-type:true:}`                  | Whether to reject requests that do not include the idempotency key header.  |
+| `{:hl-property:ttlInSeconds:}`        | `86400` (24h)                       | How long a completed response is cached.                                    |
+| `{:hl-property:pendingTtlInSeconds:}` | `60`                                | How long a pending record is considered active before it can be taken over. |
+| `{:hl-property:cachePrefix:}`         | `{:hl-value:idempotency:}`          | Prefix for cache keys in the idempotency store.                             |
+| `{:hl-property:storeClass:}`          | `{:hl-type:CacheIdempotencyStore:}` | The {b`Tempest\Idempotency\Store\IdempotencyStore`} implementation to use.  |
 
 ### Custom stores
 
@@ -282,6 +282,6 @@ return new IdempotencyConfig(
 ```
 
 ## Limitations
-
-- **Windows is not supported.** The heartbeat mechanism relies on `pcntl_alarm` and `pcntl_signal`, which are not available on Windows. Attempting to use idempotency on Windows will throw an {b`Tempest\Idempotency\Exceptions\IdempotencyPlatformWasNotSupported`} exception.
+- **Windows is not supported.** The heartbeat mechanism relies on `pcntl_alarm()` and
+  `pcntl_signal()`, which are not available on Windows. Attempting to use idempotency on Windows will throw an {b`Tempest\Idempotency\Exceptions\IdempotencyPlatformWasNotSupported`} exception.
 - **Stored responses must be serializable.** Response bodies are stored using PHP serialization or JSON encoding. Non-serializable bodies (such as generators or views) are stored as type name strings and will not reproduce the original output on replay.
