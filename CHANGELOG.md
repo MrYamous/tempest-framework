@@ -2,7 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
-## [3.4.0](https://github.com/tempestphp/tempest-framework/compare/v3.3.1..3.4.0)  —  2026-03-13
+## [3.4.1](https://github.com/tempestphp/tempest-framework/compare/v3.4.0..3.4.1)  —  2026-03-14
+
+### 🚀 Features
+
+- **database**: add QueryExecuted event with query observability (#1936) ([d53cd8d](https://github.com/tempestphp/tempest-framework/commit/d53cd8d4a1c4d1c816e3b27db88a1cfa433e4ea6))
+- **discovery**: add support for dynamic path exlusion (#2045) ([26f44b0](https://github.com/tempestphp/tempest-framework/commit/26f44b0a8a5dab3d05564cbf78a4283fde9e5071))
+
+
+## [3.4.0](https://github.com/tempestphp/tempest-framework/compare/v3.3.1..v3.4.0)  —  2026-03-13
 
 ### 🚨 Breaking changes
 
@@ -59,7 +67,7 @@ All notable changes to this project will be documented in this file.
 - **view**: [**breaking**] improved view component rendering (#1980) ([b830a16](https://github.com/tempestphp/tempest-framework/commit/b830a1601c5d8d3ecd2502e3b49be2e8f6078500))
 
 
-## [3.0.2](https://github.com/tempestphp/tempest-framework/compare/v3.0.1..v3.0.2)  —  2026-02-16
+## [3.1.0](https://github.com/tempestphp/tempest-framework/compare/v3.0.1..v3.1.0)  —  2026-02-16
 
 ### 🚨 Breaking changes
 
@@ -994,7 +1002,7 @@ All notable changes to this project will be documented in this file.
 - rector (#680) ([7fdff1d](https://github.com/tempestphp/tempest-framework/commit/7fdff1d7be48ab91fb35e1a07434ae54ef47781c))
 
 
-## [1.0.0-alpha.3](https://github.com/tempestphp/tempest-framework/compare/v1.0.0-alpha.2..v1.0.0-alpha.3)  —  2024-10-31
+## [1.0.0-alpha.3](https://github.com/tempestphp/tempest-framework/compare/v1.0.0-alpha.2..v1.0.0-alpha.3)  —  2024-10-30
 
 ### 🚨 Breaking changes
 
