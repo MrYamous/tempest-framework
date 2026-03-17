@@ -6,22 +6,14 @@ use IntlCalendar;
 use IntlDateFormatter;
 use IntlTimeZone;
 use RuntimeException;
-use Tempest\DateTime\DateStyle;
 use Tempest\DateTime\Exception\OverflowException;
 use Tempest\DateTime\Exception\ParserException;
-use Tempest\DateTime\FormatPattern;
-use Tempest\DateTime\SecondsStyle;
-use Tempest\DateTime\Timestamp;
-use Tempest\DateTime\TimeStyle;
-use Tempest\DateTime\Timezone;
 use Tempest\Intl\Locale;
 use ValueError;
 
 use function hrtime;
 use function microtime;
 use function Tempest\Intl\current_locale;
-
-use const Tempest\DateTime\NANOSECONDS_PER_SECOND;
 
 /**
  * Get the current date and time as a {@see \Tempest\DateTime\DateTime} object.
@@ -51,7 +43,7 @@ function format_rfc3339(Timestamp $timestamp, ?SecondsStyle $secondsStyle = null
 {
     $secondsStyle ??= SecondsStyle::fromTimestamp($timestamp);
 
-    if (null === $timezone) {
+    if (! $timezone instanceof Timezone) {
         $timezone = Timezone::UTC;
     } elseif ($useZ) {
         $useZ = Timezone::UTC === $timezone;
@@ -159,7 +151,7 @@ function high_resolution_time(): array
         $offset = hrtime();
 
         if ($offset === false) { // @phpstan-ignore-line identical.alwaysFalse
-            throw new \RuntimeException('The system does not provide a monotonic timer.');
+            throw new RuntimeException('The system does not provide a monotonic timer.');
         }
 
         $time = system_time();
@@ -252,7 +244,7 @@ function to_intl_timezone(Timezone $timezone): IntlTimeZone
     $tz = IntlTimeZone::createTimeZone($value);
 
     if ($tz === null) { // @phpstan-ignore-line identical.alwaysFalse
-        throw new \RuntimeException(sprintf(
+        throw new RuntimeException(sprintf(
             'Failed to create intl timezone from timezone "%s" ("%s" / "%s").',
             $timezone->name,
             $timezone->value,
@@ -261,7 +253,7 @@ function to_intl_timezone(Timezone $timezone): IntlTimeZone
     }
 
     if ($tz->getID() === 'Etc/Unknown' && $tz->getRawOffset() === 0) {
-        throw new \RuntimeException(sprintf(
+        throw new RuntimeException(sprintf(
             'Failed to create a valid intl timezone, unknown timezone "%s" ("%s" / "%s") given.',
             $timezone->name,
             $timezone->value,

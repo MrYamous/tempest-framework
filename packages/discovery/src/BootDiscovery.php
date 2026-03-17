@@ -14,6 +14,7 @@ use Throwable;
 final class BootDiscovery
 {
     private array $appliedDiscovery = [];
+
     private array $shouldSkipForClass = [];
 
     public function __construct(
@@ -61,7 +62,7 @@ final class BootDiscovery
 
             // Resolve all other discoveries from the container, optionally loading their cache
             $discoveries = array_map(
-                fn (string $discoveryClass) => $this->resolveDiscovery($discoveryClass),
+                $this->resolveDiscovery(...),
                 $this->config->classes,
             );
 
@@ -69,17 +70,15 @@ final class BootDiscovery
             $this->discover($discoveries, $discoveryLocations);
 
             return [$discoveryDiscovery, ...$discoveries];
-        } else {
-            // Resolve all manually specified discoveries
-            $discoveries = array_map(
-                fn (string $discoveryClass) => $this->resolveDiscovery($discoveryClass),
-                $discoveryClasses,
-            );
-
-            $this->discover($discoveries, $discoveryLocations);
-
-            return $discoveries;
         }
+
+        // Resolve all manually specified discoveries
+        $discoveries = array_map(
+            $this->resolveDiscovery(...),
+            $discoveryClasses,
+        );
+        $this->discover($discoveries, $discoveryLocations);
+        return $discoveries;
     }
 
     /**
@@ -164,7 +163,11 @@ final class BootDiscovery
 
         foreach ($subPaths as $subPath) {
             // `.` and `..` are skipped
-            if ($subPath === '.' || $subPath === '..') {
+            if ($subPath === '.') {
+                continue;
+            }
+
+            if ($subPath === '..') {
                 continue;
             }
 
@@ -242,9 +245,11 @@ final class BootDiscovery
         }
 
         foreach ($discoveries as $discovery) {
-            if ($discovery instanceof DiscoversPath) {
-                $discovery->discoverPath($location, $input);
+            if (! $discovery instanceof DiscoversPath) {
+                continue;
             }
+
+            $discovery->discoverPath($location, $input);
         }
     }
 

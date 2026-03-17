@@ -119,7 +119,8 @@ abstract class IntegrationTest extends TestCase
     {
         parent::setUp();
 
-        $this->setupKernel()
+        $this
+            ->setupKernel()
             ->setupConsole()
             ->setupTesters()
             ->setupBaseRequest();
@@ -245,7 +246,7 @@ abstract class IntegrationTest extends TestCase
         } catch (Throwable $throwable) {
             $this->assertInstanceOf($expectedExceptionClass, $throwable);
 
-            if ($assertException !== null) {
+            if ($assertException instanceof Closure) {
                 $assertException($throwable);
             }
 

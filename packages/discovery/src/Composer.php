@@ -44,11 +44,13 @@ final class Composer
             ->toArray();
 
         foreach ($this->namespaces as $namespace) {
-            if (Str\starts_with(Str\ensure_ends_with($namespace->path, '/'), ['app/', 'src/', 'source/', 'lib/'])) {
-                $this->mainNamespace = $namespace;
-
-                break;
+            if (! Str\starts_with(Str\ensure_ends_with($namespace->path, '/'), ['app/', 'src/', 'source/', 'lib/'])) {
+                continue;
             }
+
+            $this->mainNamespace = $namespace;
+
+            break;
         }
 
         if (! isset($this->mainNamespace) && count($this->namespaces)) {
@@ -112,7 +114,7 @@ final class Composer
 
     public function executeUpdate(): self
     {
-        if ($this->executor) {
+        if ($this->executor instanceof ProcessExecutor) {
             $this->executor->run('composer up');
         } else {
             exec('composer update');
