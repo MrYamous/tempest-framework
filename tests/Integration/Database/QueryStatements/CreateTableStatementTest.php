@@ -8,6 +8,7 @@ use Tempest\Database\Config\DatabaseConfig;
 use Tempest\Database\Config\DatabaseDialect;
 use Tempest\Database\Database;
 use Tempest\Database\DialectWasNotSupported;
+use Tempest\Database\Enums\DatabaseTextLength;
 use Tempest\Database\Exceptions\DefaultValueWasInvalid;
 use Tempest\Database\Exceptions\ValueWasInvalid;
 use Tempest\Database\MigratesUp;
@@ -233,6 +234,35 @@ final class CreateTableStatementTest extends FrameworkIntegrationTestCase
             ->compile(DatabaseDialect::MYSQL);
 
         $this->assertSame($varcharStatement, $stringStatement);
+    }
+
+    public function test_text_with_length_limit(): void
+    {
+        $tinyText = new CreateTableStatement('test-table')
+            ->text('content', false, DatabaseTextLength::TINY, null)
+            ->compile(dialect: DatabaseDialect::MYSQL);
+        $text = new CreateTableStatement('test-table')
+            ->text('content', false, DatabaseTextLength::DEFAULT)
+            ->compile(dialect: DatabaseDialect::MYSQL);
+        $mediumText = new CreateTableStatement('test-table')
+            ->text('content', false, DatabaseTextLength::MEDIUM)
+            ->compile(dialect: DatabaseDialect::MYSQL);
+        $longText = new CreateTableStatement('test-table')
+            ->text('content', false, DatabaseTextLength::LONG)
+            ->compile(dialect: DatabaseDialect::MYSQL);
+        $default = new CreateTableStatement('test-table')
+            ->text('content', false)
+            ->compile(dialect: DatabaseDialect::MYSQL);
+        $value = new CreateTableStatement('test-table')
+            ->text('content', false, 180)
+            ->compile(dialect: DatabaseDialect::MYSQL);
+
+        $this->assertStringContainsString('TINYTEXT', $tinyText);
+        $this->assertStringContainsString('TEXT', $text);
+        $this->assertStringContainsString('MEDIUMTEXT', $mediumText);
+        $this->assertStringContainsString('LONGTEXT', $longText);
+        $this->assertStringContainsString('TEXT', $default);
+        $this->assertStringContainsString('TINYTEXT', $value);
     }
 
     public function test_object_field(): void
