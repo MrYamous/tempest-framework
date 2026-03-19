@@ -2,7 +2,29 @@
 
 All notable changes to this project will be documented in this file.
 
-## [3.4.1](https://github.com/tempestphp/tempest-framework/compare/v3.4.0..3.4.1)  —  2026-03-14
+## [3.5.0](https://github.com/tempestphp/tempest-framework/compare/v3.4.1..3.5.0)  —  2026-03-19
+
+### 🚨 Breaking changes
+
+- **database**: [**breaking**] change mysql uuid type from `varchar(36)` to `char(36)` (#1987) ([19f296c](https://github.com/tempestphp/tempest-framework/commit/19f296cde0029f6d85fc359d7b113131eb4a6069))
+
+### 🚀 Features
+
+- **container**: resettable container (#2049) ([ff10111](https://github.com/tempestphp/tempest-framework/commit/ff10111f5ff3016107092457db30a63d94fa4771))
+- **database**: add support for hasonethrough relation (#2050) ([321fecf](https://github.com/tempestphp/tempest-framework/commit/321fecf23a679b63952723044f8d0b481aa25e23))
+- **database**: add support for hasmanythrough relation (#2052) ([63db99a](https://github.com/tempestphp/tempest-framework/commit/63db99a3b995b0c2e28d3109fc8606faf201e7a0))
+- **database**: use different text type declaration with mysql according to field length (#1972) ([1048103](https://github.com/tempestphp/tempest-framework/commit/1048103ce6f844d1221e3fc3da0164cd2cdeca66))
+- **database**: add integer type sizes (#1978) ([3d1db7a](https://github.com/tempestphp/tempest-framework/commit/3d1db7ac37b6705b14593475af0ede77d7ab6505))
+- **view**: tag override with the as prop (#2042) ([4c492ff](https://github.com/tempestphp/tempest-framework/commit/4c492ffb1e73c0cfb8b5f9db94b151acc75d8935))
+
+### 🐛 Bug fixes
+
+- **database**: prevent infinite loop when creating a model with a HasOne relationship (#1962) ([191ba31](https://github.com/tempestphp/tempest-framework/commit/191ba31080a87be6c354a05e853763073ab542bf))
+- **discovery**: allow specifying discovery classes and locations during cache generation (#2048) ([7d2a433](https://github.com/tempestphp/tempest-framework/commit/7d2a43376a031ae2659311c99c4a46653ec114a2))
+- **view**: preserve source location in text elements (#1999) ([ac3adf2](https://github.com/tempestphp/tempest-framework/commit/ac3adf2e53de56edebe432a1ff91d78e7bac9df5))
+
+
+## [3.4.1](https://github.com/tempestphp/tempest-framework/compare/v3.4.0..v3.4.1)  —  2026-03-14
 
 ### 🚀 Features
 
@@ -67,7 +89,7 @@ All notable changes to this project will be documented in this file.
 - **view**: [**breaking**] improved view component rendering (#1980) ([b830a16](https://github.com/tempestphp/tempest-framework/commit/b830a1601c5d8d3ecd2502e3b49be2e8f6078500))
 
 
-## [3.1.0](https://github.com/tempestphp/tempest-framework/compare/v3.0.1..v3.1.0)  —  2026-02-16
+## [3.0.2](https://github.com/tempestphp/tempest-framework/compare/v3.0.1..v3.0.2)  —  2026-02-16
 
 ### 🚨 Breaking changes
 
@@ -1002,7 +1024,7 @@ All notable changes to this project will be documented in this file.
 - rector (#680) ([7fdff1d](https://github.com/tempestphp/tempest-framework/commit/7fdff1d7be48ab91fb35e1a07434ae54ef47781c))
 
 
-## [1.0.0-alpha.3](https://github.com/tempestphp/tempest-framework/compare/v1.0.0-alpha.2..v1.0.0-alpha.3)  —  2024-10-30
+## [1.0.0-alpha.3](https://github.com/tempestphp/tempest-framework/compare/v1.0.0-alpha.2..v1.0.0-alpha.3)  —  2024-10-31
 
 ### 🚨 Breaking changes
 
@@ -1119,3 +1141,5 @@ All notable changes to this project will be documented in this file.
 - phpunit fixes (#436) ([759134f](https://github.com/tempestphp/tempest-framework/commit/759134f50f2327efb04f9334e78baa88d877a5e7))
 - tag console highlighter (#437) ([b7c5332](https://github.com/tempestphp/tempest-framework/commit/b7c53325ff22905f3d09015f466391791f8f886f))
 - update console readme (#444) ([7c6f1b0](https://github.com/tempestphp/tempest-framework/commit/7c6f1b083fd429d58cbde2d30b4af2143e9c58f0))
+
+
