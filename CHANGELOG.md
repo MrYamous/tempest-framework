@@ -2,7 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
-## [3.6.0](https://github.com/tempestphp/tempest-framework/compare/v3.5.0..3.6.0)  —  2026-03-19
+## [3.6.1](https://github.com/tempestphp/tempest-framework/compare/v3.6.0..3.6.1)  —  2026-03-21
+
+### 🐛 Bug fixes
+
+- **container**: correct typo in `container:show` command (#2057) ([41a47bf](https://github.com/tempestphp/tempest-framework/commit/41a47bfa2969f3b06a393e1687a12591f53eeed3))
+
+
+## [3.6.0](https://github.com/tempestphp/tempest-framework/compare/v3.5.0..v3.6.0)  —  2026-03-19
 
 ### 🚀 Features
 
