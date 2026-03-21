@@ -9,12 +9,15 @@ use Tempest\Database\PrimaryKey;
 use Tempest\Database\Query;
 use Tests\Tempest\Fixtures\Migrations\CreateAuthorTable;
 use Tests\Tempest\Fixtures\Migrations\CreateBookTable;
+use Tests\Tempest\Fixtures\Migrations\CreateBookTagTable;
 use Tests\Tempest\Fixtures\Migrations\CreateChapterTable;
 use Tests\Tempest\Fixtures\Migrations\CreatePublishersTable;
+use Tests\Tempest\Fixtures\Migrations\CreateTagTable;
 use Tests\Tempest\Fixtures\Modules\Books\Models\Author;
 use Tests\Tempest\Fixtures\Modules\Books\Models\AuthorType;
 use Tests\Tempest\Fixtures\Modules\Books\Models\Book;
 use Tests\Tempest\Fixtures\Modules\Books\Models\Chapter;
+use Tests\Tempest\Fixtures\Modules\Books\Models\Tag;
 use Tests\Tempest\Integration\FrameworkIntegrationTestCase;
 
 use function Tempest\Database\query;
@@ -198,5 +201,65 @@ final class InsertQueryBuilderTest extends FrameworkIntegrationTestCase
 
         $this->assertSame($expected, $query->compile()->toString());
         $this->assertSame(['test'], $query->bindings);
+    }
+
+    public function test_insert_with_belongs_to_many_creates_pivot_rows(): void
+    {
+        $this->database->migrate(
+            CreateMigrationsTable::class,
+            CreatePublishersTable::class,
+            CreateAuthorTable::class,
+            CreateBookTable::class,
+            CreateTagTable::class,
+            CreateBookTagTable::class,
+        );
+
+        $tag = Tag::new(
+            label: 'php',
+            books: [
+                Book::new(title: 'Book One'),
+                Book::new(title: 'Book Two'),
+            ],
+        );
+
+        $tagId = query(model: Tag::class)
+            ->insert($tag)
+            ->execute();
+
+        $this->assertNotNull($tagId);
+
+        $bookCount = query(model: 'books')->count()->execute();
+        $pivotCount = query(model: 'books_tags')->count()->execute();
+
+        $this->assertSame(2, $bookCount);
+        $this->assertSame(2, $pivotCount);
+    }
+
+    public function test_insert_skips_has_many_through_property(): void
+    {
+        $tag = Tag::new(label: 'php');
+
+        $query = query(model: Tag::class)
+            ->insert($tag)
+            ->build();
+
+        $expected = $this->buildExpectedInsert(query: 'INSERT INTO `tags` (`label`) VALUES (?)');
+
+        $this->assertSameWithoutBackticks($expected, $query->compile());
+        $this->assertSame(['php'], $query->bindings);
+    }
+
+    public function test_insert_skips_has_one_through_property(): void
+    {
+        $tag = Tag::new(label: 'php');
+
+        $query = query(model: Tag::class)
+            ->insert($tag)
+            ->build();
+
+        $expected = $this->buildExpectedInsert(query: 'INSERT INTO `tags` (`label`) VALUES (?)');
+
+        $this->assertSameWithoutBackticks($expected, $query->compile());
+        $this->assertSame(['php'], $query->bindings);
     }
 }

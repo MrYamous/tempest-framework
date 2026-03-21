@@ -14,11 +14,15 @@ use Tempest\Database\PrimaryKey;
 use Tempest\Database\Query;
 use Tempest\Database\Table;
 use Tests\Tempest\Fixtures\Migrations\CreateAuthorTable;
+use Tests\Tempest\Fixtures\Migrations\CreateBookTable;
+use Tests\Tempest\Fixtures\Migrations\CreateBookTagTable;
 use Tests\Tempest\Fixtures\Migrations\CreatePublishersTable;
+use Tests\Tempest\Fixtures\Migrations\CreateTagTable;
 use Tests\Tempest\Fixtures\Modules\Books\Models\Author;
 use Tests\Tempest\Fixtures\Modules\Books\Models\AuthorType;
 use Tests\Tempest\Fixtures\Modules\Books\Models\Book;
 use Tests\Tempest\Fixtures\Modules\Books\Models\Chapter;
+use Tests\Tempest\Fixtures\Modules\Books\Models\Tag;
 use Tests\Tempest\Integration\FrameworkIntegrationTestCase;
 
 use function Tempest\Database\query;
@@ -467,6 +471,82 @@ final class UpdateQueryBuilderTest extends FrameworkIntegrationTestCase
             ->update(items: [['name' => 'Test Item']])
             ->whereNot('id', 999)
             ->execute();
+    }
+
+    public function test_update_skips_has_many_through_property(): void
+    {
+        $tag = Tag::new(
+            id: new PrimaryKey(value: 1),
+            label: 'php',
+        );
+
+        $query = query(model: $tag)
+            ->update(label: 'php8')
+            ->build();
+
+        $this->assertSameWithoutBackticks(
+            'UPDATE `tags` SET `label` = ? WHERE `tags`.`id` = ?',
+            $query->compile(),
+        );
+
+        $this->assertSame(['php8', 1], $query->bindings);
+    }
+
+    public function test_update_skips_has_one_through_property(): void
+    {
+        $tag = Tag::new(
+            id: new PrimaryKey(value: 1),
+            label: 'php',
+        );
+
+        $query = query(model: $tag)
+            ->update(label: 'php8')
+            ->build();
+
+        $this->assertSameWithoutBackticks(
+            'UPDATE `tags` SET `label` = ? WHERE `tags`.`id` = ?',
+            $query->compile(),
+        );
+
+        $this->assertSame(['php8', 1], $query->bindings);
+    }
+
+    public function test_update_with_belongs_to_many_syncs_pivot_rows(): void
+    {
+        $this->database->migrate(
+            CreateMigrationsTable::class,
+            CreatePublishersTable::class,
+            CreateAuthorTable::class,
+            CreateBookTable::class,
+            CreateTagTable::class,
+            CreateBookTagTable::class,
+        );
+
+        $tagId = query(model: Tag::class)->insert(
+            Tag::new(
+                label: 'php',
+                books: [
+                    Book::new(title: 'Book One'),
+                ],
+            ),
+        )->execute();
+
+        // Update: replace book1 with book2 and book3
+        query(model: Tag::class)
+            ->update(
+                books: [
+                    Book::new(title: 'Book Two'),
+                    Book::new(title: 'Book Three'),
+                ],
+            )
+            ->whereField(field: 'id', value: $tagId)
+            ->execute();
+
+        $bookCount = query(model: 'books')->count()->execute();
+        $pivotCount = query(model: 'books_tags')->count()->execute();
+
+        $this->assertSame(3, $bookCount);
+        $this->assertSame(2, $pivotCount);
     }
 
     public function test_update_query_builder_from_another_query_builder(): void
