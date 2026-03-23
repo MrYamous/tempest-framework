@@ -2,7 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
-## [3.6.2](https://github.com/tempestphp/tempest-framework/compare/v3.6.1..3.6.2)  —  2026-03-23
+## [3.6.3](https://github.com/tempestphp/tempest-framework/compare/v3.6.2..3.6.3)  —  2026-03-23
+
+### 🐛 Bug fixes
+
+- **database**: fix is relation loaded and correctly unset properties (#2063) ([a0e1f36](https://github.com/tempestphp/tempest-framework/commit/a0e1f360db449cf35fd7762dbec5be74c977f646))
+- **database**: relations joins overshadowing if property name conflict in chain (#2064) ([80bdaba](https://github.com/tempestphp/tempest-framework/commit/80bdabaff50f08b7e17e0ab4d8aea98dbc2a9caf))
+
+
+## [3.6.2](https://github.com/tempestphp/tempest-framework/compare/v3.6.1..v3.6.2)  —  2026-03-23
 
 ### 🐛 Bug fixes
 
