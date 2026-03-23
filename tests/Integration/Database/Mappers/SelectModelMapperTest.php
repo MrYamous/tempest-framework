@@ -2,11 +2,25 @@
 
 namespace Tests\Tempest\Integration\Database\Mappers;
 
+use Tempest\Database\BelongsToMany;
+use Tempest\Database\Exceptions\RelationWasMissing;
+use Tempest\Database\IsDatabaseModel;
 use Tempest\Database\Mappers\SelectModelMapper;
+use Tempest\Database\Migrations\CreateMigrationsTable;
+use Tempest\Database\Table;
+use Tests\Tempest\Fixtures\Migrations\CreateAuthorTable;
+use Tests\Tempest\Fixtures\Migrations\CreateBookTable;
+use Tests\Tempest\Fixtures\Migrations\CreateBookTagTable;
+use Tests\Tempest\Fixtures\Migrations\CreatePublishersTable;
+use Tests\Tempest\Fixtures\Migrations\CreateTagTable;
 use Tests\Tempest\Fixtures\Modules\Books\Models\Author;
 use Tests\Tempest\Fixtures\Modules\Books\Models\Book;
+use Tests\Tempest\Fixtures\Modules\Books\Models\Tag;
+use Tests\Tempest\Fixtures\Modules\Books\Models\TagWithEagerBooks;
+use Tests\Tempest\Fixtures\Modules\Books\Models\TagWithLazyBooks;
 use Tests\Tempest\Integration\FrameworkIntegrationTestCase;
 
+use function Tempest\Database\inspect;
 use function Tempest\Mapper\map;
 
 final class SelectModelMapperTest extends FrameworkIntegrationTestCase
@@ -101,6 +115,225 @@ final class SelectModelMapperTest extends FrameworkIntegrationTestCase
 
         $this->assertCount(2, $authors[0]->books[0]->chapters);
         $this->assertCount(1, $authors[0]->books);
+    }
+
+    public function test_lazy_belongs_to_many_not_eager_loaded_is_unset(): void
+    {
+        $this->database->migrate(
+            CreateMigrationsTable::class,
+            CreatePublishersTable::class,
+            CreateAuthorTable::class,
+            CreateBookTable::class,
+            CreateTagTable::class,
+            CreateBookTagTable::class,
+        );
+
+        Tag::create(
+            label: 'PHP',
+            books: [
+                Book::new(title: 'Book One'),
+                Book::new(title: 'Book Two'),
+            ],
+        );
+
+        $tags = TagWithLazyBooks::select()->all();
+
+        $tag = $tags[0];
+
+        $this->assertSame(expected: 'PHP', actual: $tag->label);
+        $this->assertFalse(condition: inspect(model: $tag)->isRelationLoaded(relation: 'books'));
+
+        $this->assertCount(expectedCount: 2, haystack: $tag->books);
+        $this->assertSame(expected: 'Book One', actual: $tag->books[0]->title);
+        $this->assertSame(expected: 'Book Two', actual: $tag->books[1]->title);
+    }
+
+    public function test_untagged_belongs_to_many_not_loaded_is_unset(): void
+    {
+        $data = [
+            [
+                'tags.id' => 1,
+                'tags.label' => 'PHP',
+            ],
+        ];
+
+        $tags = map($data)->with(mapper: SelectModelMapper::class)->to(to: Tag::class);
+
+        $tag = $tags[0];
+
+        $this->assertSame(expected: 'PHP', actual: $tag->label);
+        $this->assertFalse(condition: inspect(model: $tag)->isRelationLoaded(relation: 'books'));
+
+        $this->expectException(RelationWasMissing::class);
+        // Accessing unset property triggers RelationWasMissing
+        /** @phpstan-ignore expr.resultUnused */
+        $tag->books;
+    }
+
+    public function test_has_many_through_not_loaded_is_unset(): void
+    {
+        $data = [
+            [
+                'tags.id' => 1,
+                'tags.label' => 'PHP',
+            ],
+        ];
+
+        $tags = map($data)->with(mapper: SelectModelMapper::class)->to(to: Tag::class);
+
+        $tag = $tags[0];
+
+        $this->assertFalse(condition: inspect(model: $tag)->isRelationLoaded(relation: 'reviewers'));
+
+        $this->expectException(RelationWasMissing::class);
+        // Accessing unset property triggers RelationWasMissing
+        /** @phpstan-ignore expr.resultUnused */
+        $tag->reviewers;
+    }
+
+    public function test_has_one_through_not_loaded_is_unset(): void
+    {
+        $data = [
+            [
+                'tags.id' => 1,
+                'tags.label' => 'PHP',
+            ],
+        ];
+
+        $tags = map($data)->with(mapper: SelectModelMapper::class)->to(to: Tag::class);
+
+        $tag = $tags[0];
+
+        $this->assertFalse(condition: inspect(model: $tag)->isRelationLoaded(relation: 'topReviewer'));
+
+        $this->expectException(RelationWasMissing::class);
+        // Accessing unset property triggers RelationWasMissing
+        /** @phpstan-ignore expr.resultUnused */
+        $tag->topReviewer;
+    }
+
+    public function test_eager_belongs_to_many_loaded_has_books(): void
+    {
+        $data = [
+            [
+                'tags.id' => 1,
+                'tags.label' => 'PHP',
+                'books.id' => 1,
+                'books.title' => 'LOTR 1',
+            ],
+            [
+                'tags.id' => 1,
+                'tags.label' => 'PHP',
+                'books.id' => 2,
+                'books.title' => 'LOTR 2',
+            ],
+        ];
+
+        $tags = map($data)->with(mapper: SelectModelMapper::class)->to(to: TagWithEagerBooks::class);
+
+        $tag = $tags[0];
+
+        $this->assertSame(expected: 'PHP', actual: $tag->label);
+        $this->assertTrue(condition: inspect(model: $tag)->isRelationLoaded(relation: 'books'));
+        $this->assertCount(expectedCount: 2, haystack: $tag->books);
+        $this->assertSame(expected: 'LOTR 1', actual: $tag->books[0]->title);
+        $this->assertSame(expected: 'LOTR 2', actual: $tag->books[1]->title);
+    }
+
+    public function test_belongs_to_many_loaded_with_no_results_returns_empty_array(): void
+    {
+        $this->database->migrate(
+            CreateMigrationsTable::class,
+            CreatePublishersTable::class,
+            CreateAuthorTable::class,
+            CreateBookTable::class,
+            CreateTagTable::class,
+            CreateBookTagTable::class,
+        );
+
+        Tag::create(label: 'PHP');
+
+        $tag = TagWithLazyBooks::select()->with('books')->first();
+
+        $this->assertSame(expected: 'PHP', actual: $tag->label);
+        $this->assertTrue(condition: inspect(model: $tag)->isRelationLoaded(relation: 'books'));
+        $this->assertSame(expected: [], actual: $tag->books);
+    }
+
+    public function test_has_one_not_loaded_is_unset(): void
+    {
+        $data = [
+            [
+                'books.id' => 1,
+                'books.title' => 'LOTR',
+            ],
+        ];
+
+        $books = map($data)->with(mapper: SelectModelMapper::class)->to(to: Book::class);
+
+        $book = $books[0];
+
+        $this->assertSame(expected: 'LOTR', actual: $book->title);
+        $this->assertFalse(condition: inspect(model: $book)->isRelationLoaded(relation: 'isbn'));
+
+        $this->expectException(RelationWasMissing::class);
+        // Accessing unset property triggers RelationWasMissing
+        /** @phpstan-ignore expr.resultUnused */
+        $book->isbn;
+    }
+
+    public function test_has_many_not_loaded_is_unset(): void
+    {
+        $data = [
+            [
+                'books.id' => 1,
+                'books.title' => 'LOTR',
+            ],
+        ];
+
+        $books = map($data)->with(mapper: SelectModelMapper::class)->to(to: Book::class);
+
+        $book = $books[0];
+
+        $this->assertSame(expected: 'LOTR', actual: $book->title);
+        $this->assertFalse(condition: inspect(model: $book)->isRelationLoaded(relation: 'chapters'));
+
+        $this->expectException(RelationWasMissing::class);
+        // Accessing unset property triggers RelationWasMissing
+        /** @phpstan-ignore expr.resultUnused */
+        $book->chapters;
+    }
+
+    public function test_nested_belongs_to_many_on_belongs_to(): void
+    {
+        $data = [
+            [
+                'parent_with_role.id' => 1,
+                'parent_with_role.name' => 'John',
+                'role.id' => 1,
+                'role.name' => 'admin',
+                'role.permissions.id' => 1,
+                'role.permissions.label' => 'create',
+            ],
+            [
+                'parent_with_role.id' => 1,
+                'parent_with_role.name' => 'John',
+                'role.id' => 1,
+                'role.name' => 'admin',
+                'role.permissions.id' => 2,
+                'role.permissions.label' => 'delete',
+            ],
+        ];
+
+        $users = map($data)->with(mapper: SelectModelMapper::class)->to(to: ParentWithRole::class);
+
+        $user = $users[0];
+
+        $this->assertSame(expected: 'John', actual: $user->name);
+        $this->assertSame(expected: 'admin', actual: $user->role->name);
+        $this->assertCount(expectedCount: 2, haystack: $user->role->permissions);
+        $this->assertSame(expected: 'create', actual: $user->role->permissions[0]->label);
+        $this->assertSame(expected: 'delete', actual: $user->role->permissions[1]->label);
     }
 
     public function test_array_of_serialized_enums(): void
@@ -261,4 +494,34 @@ enum EnumToBeMappedToArray: string
 {
     case ADMIN = 'admin';
     case USER = 'user';
+}
+
+#[Table(name: 'parent_with_role')]
+final class ParentWithRole
+{
+    use IsDatabaseModel;
+
+    public string $name;
+
+    public ?RoleWithPermissions $role = null;
+}
+
+#[Table(name: 'roles')]
+final class RoleWithPermissions
+{
+    use IsDatabaseModel;
+
+    public string $name;
+
+    /** @var \Tests\Tempest\Integration\Database\Mappers\Permission[] */
+    #[BelongsToMany]
+    public array $permissions = [];
+}
+
+#[Table(name: 'permissions')]
+final class Permission
+{
+    use IsDatabaseModel;
+
+    public string $label;
 }
