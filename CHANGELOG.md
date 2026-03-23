@@ -2,7 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
-## [3.6.1](https://github.com/tempestphp/tempest-framework/compare/v3.6.0..3.6.1)  —  2026-03-21
+## [3.6.2](https://github.com/tempestphp/tempest-framework/compare/v3.6.1..3.6.2)  —  2026-03-23
+
+### 🐛 Bug fixes
+
+- **http**: remove session middleware while running static:generate (#2066) ([a7c9783](https://github.com/tempestphp/tempest-framework/commit/a7c978364d092c979437ac97932b540ed2bf56b8))
+
+
+## [3.6.1](https://github.com/tempestphp/tempest-framework/compare/v3.6.0..v3.6.1)  —  2026-03-21
 
 ### 🐛 Bug fixes
 
@@ -108,7 +115,7 @@ All notable changes to this project will be documented in this file.
 - **view**: [**breaking**] improved view component rendering (#1980) ([b830a16](https://github.com/tempestphp/tempest-framework/commit/b830a1601c5d8d3ecd2502e3b49be2e8f6078500))
 
 
-## [3.1.0](https://github.com/tempestphp/tempest-framework/compare/v3.0.1..v3.1.0)  —  2026-02-16
+## [3.0.2](https://github.com/tempestphp/tempest-framework/compare/v3.0.1..v3.0.2)  —  2026-02-16
 
 ### 🚨 Breaking changes
 
@@ -1043,7 +1050,7 @@ All notable changes to this project will be documented in this file.
 - rector (#680) ([7fdff1d](https://github.com/tempestphp/tempest-framework/commit/7fdff1d7be48ab91fb35e1a07434ae54ef47781c))
 
 
-## [1.0.0-alpha.3](https://github.com/tempestphp/tempest-framework/compare/v1.0.0-alpha.2..v1.0.0-alpha.3)  —  2024-10-30
+## [1.0.0-alpha.3](https://github.com/tempestphp/tempest-framework/compare/v1.0.0-alpha.2..v1.0.0-alpha.3)  —  2024-10-31
 
 ### 🚨 Breaking changes
 
