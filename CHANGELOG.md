@@ -2,7 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
-## [3.6.3](https://github.com/tempestphp/tempest-framework/compare/v3.6.2..3.6.3)  —  2026-03-23
+## [3.7.0](https://github.com/tempestphp/tempest-framework/compare/v3.6.3..3.7.0)  —  2026-03-24
+
+### 🚀 Features
+
+- **core**: remove confirmation before running installers (#2069) ([f9149a6](https://github.com/tempestphp/tempest-framework/commit/f9149a6dbc11ff9ff202e9b37189e423c26204bd))
+- **discovery**: skip discovery with closure (#2070) ([396f756](https://github.com/tempestphp/tempest-framework/commit/396f756a589ec2fef016172bb790fe1071840929))
+- **http**: introduce session cleanup strategies (#2068) ([3ebf23c](https://github.com/tempestphp/tempest-framework/commit/3ebf23c51043ab4f523e1796561010d73d8368d6))
+
+### 🐛 Bug fixes
+
+- **console**: discrepancy between interactive and static single choice result (#2067) ([610423b](https://github.com/tempestphp/tempest-framework/commit/610423b083473f2830a38ecd0099a2daba18a96e))
+
+
+## [3.6.3](https://github.com/tempestphp/tempest-framework/compare/v3.6.2..v3.6.3)  —  2026-03-23
 
 ### 🐛 Bug fixes
 
