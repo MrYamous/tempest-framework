@@ -2,7 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
-## [3.7.0](https://github.com/tempestphp/tempest-framework/compare/v3.6.3..3.7.0)  —  2026-03-24
+## [3.7.1](https://github.com/tempestphp/tempest-framework/compare/v3.7.0..3.7.1)  —  2026-03-26
+
+### 🐛 Bug fixes
+
+- **mapper**: setting virtual properties (#2072) ([600699b](https://github.com/tempestphp/tempest-framework/commit/600699b34d7338a3a68d371a8739c06c2d4758f6))
+
+
+## [3.7.0](https://github.com/tempestphp/tempest-framework/compare/v3.6.3..v3.7.0)  —  2026-03-24
 
 ### 🚀 Features
 
