@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Tempest\Discovery;
 
+use ArgumentCountError;
 use AssertionError;
 use Closure;
 use Pest\Exceptions\InvalidPestCommand;
 use Psr\Container\ContainerInterface;
-use Tempest\Container\GenericContainer;
+use Psr\Container\NotFoundExceptionInterface;
+use Tempest\Discovery\Exceptions\DiscoveryClassCouldNotBeResolved;
 use Tempest\Reflection\ClassReflector;
 use Tempest\Support\Filesystem;
 use Throwable;
@@ -260,18 +262,28 @@ final class BootDiscovery
     /**
      * Create a discovery instance from a class name.
      * Optionally set the cached discovery items whenever caching is enabled.
+     *
      * @template T of Discovery
      * @param class-string<T> $discoveryClass
      * @return T
      */
     private function resolveDiscovery(string $discoveryClass): Discovery
     {
-        if ($this->container instanceof GenericContainer || $this->container->has($discoveryClass)) {
+        $discovery = null;
+
+        try {
             /** @var Discovery $discovery */
             $discovery = $this->container->get($discoveryClass);
-        } else {
-            /** @var Discovery $discovery */
-            $discovery = new $discoveryClass();
+        } catch (NotFoundExceptionInterface) {
+            // @mago-expect lint:no-empty-catch-clause
+        }
+
+        if ($discovery === null) {
+            try {
+                $discovery = new $discoveryClass();
+            } catch (ArgumentCountError) { // @phpstan-ignore catch.neverThrown
+                throw DiscoveryClassCouldNotBeResolved::forDiscoveryClass($discoveryClass);
+            }
         }
 
         $discovery->setItems(new DiscoveryItems());
