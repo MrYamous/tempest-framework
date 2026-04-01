@@ -2,7 +2,34 @@
 
 All notable changes to this project will be documented in this file.
 
-## [3.8.0](https://github.com/tempestphp/tempest-framework/compare/v3.7.1..3.8.0)  —  2026-03-27
+## [3.9.0](https://github.com/tempestphp/tempest-framework/compare/v3.8.0..3.9.0)  —  2026-04-01
+
+### 🚨 Breaking changes
+
+- **core**: [**breaking**] migrate installers from interfaces to attributes (#2073) ([f116247](https://github.com/tempestphp/tempest-framework/commit/f1162475c1a432bec8d9c8442f46f7c895db7765))
+
+### 🚀 Features
+
+- **database**: add support for `whereHas` and `whereDoesntHave` (#2081) ([5469e01](https://github.com/tempestphp/tempest-framework/commit/5469e0107937302ea572ad4ffb0749b0a38d44d5))
+- **database**: add `min`, `max`, `avg` and `sum` to query builders (#2083) ([c83783c](https://github.com/tempestphp/tempest-framework/commit/c83783cd6e7109cb0ff54d878fd065d9006574ac))
+- **discovery**: support containers with autowiring (#2084) ([4a85663](https://github.com/tempestphp/tempest-framework/commit/4a85663685b0f8af3e3894934dbf5b4711e4abde))
+
+### ⚡ Performance
+
+- **discovery**: support caching discovery in one build pass (#2085) ([5e1731f](https://github.com/tempestphp/tempest-framework/commit/5e1731f94689626c720b1c9b5bd3a0d938419815))
+
+### 🐛 Bug fixes
+
+- **core**: properly check paths during config loading on Windows (#2091) ([e71f2b3](https://github.com/tempestphp/tempest-framework/commit/e71f2b39ec375e820c0a22dbb4f919f435d8bdda))
+- **database**: convert backtick identifiers to double quotes for postgres (#2093) ([c0d6ebe](https://github.com/tempestphp/tempest-framework/commit/c0d6ebefd082d3ae0e5cc637fa8c62f9ad613d7d))
+- **database**: check explicit relation attributes after singularizing property names (#2090) ([ccd398f](https://github.com/tempestphp/tempest-framework/commit/ccd398fe8a3ae55ec16808b96df38d63c2ccd82d))
+- **database**: support multiple model properties joining the same table (#2080) ([806c7c0](https://github.com/tempestphp/tempest-framework/commit/806c7c0d70537e65aa8ed6b4dbcc20cbf2d177b8))
+- **database**: target `whereHas` callback to the target table instead of the pivot table (#2095) ([da2ee87](https://github.com/tempestphp/tempest-framework/commit/da2ee878736a29edf7424131585e9b883eda1623))
+- **discovery**: discover packages using `tempest/discovery` (#2082) ([148c698](https://github.com/tempestphp/tempest-framework/commit/148c6986ac21ab85281fe50af54eb271a1585e40))
+- **intl**: handle snake case when singularizing/pluralizing last words (#2089) ([ba92595](https://github.com/tempestphp/tempest-framework/commit/ba925951610e8987599a77663e7d8e779b8af89d))
+
+
+## [3.8.0](https://github.com/tempestphp/tempest-framework/compare/v3.7.1..v3.8.0)  —  2026-03-27
 
 ### 🚀 Features
 
