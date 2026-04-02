@@ -6,7 +6,8 @@ namespace Tempest\Generation\TypeScript\TypeResolvers;
 
 use BackedEnum;
 use Tempest\Core\Priority;
-use Tempest\Generation\TypeScript\ResolvedType;
+use Tempest\Generation\TypeScript\TypeNodes\LiteralTypeNode;
+use Tempest\Generation\TypeScript\TypeNodes\TypeNode;
 use Tempest\Generation\TypeScript\TypeResolver;
 use Tempest\Generation\TypeScript\TypeScriptGenerator;
 use Tempest\Reflection\TypeReflector;
@@ -19,13 +20,13 @@ final class EnumCaseTypeResolver implements TypeResolver
         return $type->isEnumCase();
     }
 
-    public function resolve(TypeReflector $type, TypeScriptGenerator $generator): ResolvedType
+    public function resolve(TypeReflector $type, TypeScriptGenerator $generator): TypeNode
     {
         $case = $type->asEnumCase()->getValue();
         $value = $case instanceof BackedEnum
             ? $case->value
             : $case->name;
 
-        return new ResolvedType(is_string($value) ? "'{$value}'" : $value);
+        return new LiteralTypeNode($value);
     }
 }
