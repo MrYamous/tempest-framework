@@ -22,6 +22,7 @@ final readonly class EnumCaster implements Caster, DynamicCaster, ConfigurableCa
      */
     public function __construct(
         private string $enum,
+        private bool $nullable = false,
     ) {}
 
     public static function accepts(PropertyReflector|TypeReflector $input): bool
@@ -35,11 +36,22 @@ final readonly class EnumCaster implements Caster, DynamicCaster, ConfigurableCa
 
     public static function configure(PropertyReflector $property, Context $context): self
     {
-        return new self(enum: $property->getType()->getName());
+        return new self(
+            enum: $property->getType()->getName(),
+            nullable: $property->isNullable(),
+        );
     }
 
     public function cast(mixed $input): ?object
     {
+        if (is_string($input)) {
+            $input = trim($input);
+        }
+
+        if ($this->nullable && ($input === null || $input === '' || is_string($input) && mb_strtolower($input) === 'null')) {
+            return null;
+        }
+
         if ($input === null) {
             return null;
         }
