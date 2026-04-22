@@ -757,6 +757,43 @@ query(model: Author::class)->delete()->whereDoesntHave(relation: 'books')->execu
 query(model: Author::class)->update(verified: true)->whereHas(relation: 'books')->execute();
 ```
 
+### Querying relation properties
+
+While the global `query(Model::class)` function creates a query builder for any model, models using the `IsDatabaseModel` trait also have a `query()` method that returns a query builder scoped to a specific relation. The returned `QueryBuilder` is pre-filtered to only include records belonging to that model:
+
+```php
+// Select with constraints
+$books = $author->query('books')->select()->whereField(field: 'title', value: 'Timeline Taxi')->all();
+$books = $author->query('books')->select()->limit(limit: 5)->all();
+
+// Count related records
+$count = $author->query('books')->count()->execute();
+
+// Update scoped to relation
+$author->query('books')->update(title: 'Updated')->execute();
+
+// Delete scoped to relation
+$author->query('books')->delete()->execute();
+```
+
+The `query()` method works with all relation types:
+
+```php
+// HasMany / HasOne — simple FK on related table
+$author->query('books')->select()->all();
+$book->query('isbn')->select()->first();
+
+// BelongsTo — subquery through owner's FK
+$book->query('author')->select()->first();
+
+// HasManyThrough / HasOneThrough — subquery through intermediate table
+$tag->query('reviewers')->select()->all();
+$tag->query('topReviewer')->select()->first();
+
+// BelongsToMany — subquery through pivot table
+$tag->query('books')->select()->all();
+```
+
 ## Migrations
 
 When persisting objects to the database, a table is required to store the data. A migration is a file that instructs the framework how to manage the database schema.
