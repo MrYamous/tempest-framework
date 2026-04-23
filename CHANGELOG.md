@@ -2,7 +2,35 @@
 
 All notable changes to this project will be documented in this file.
 
-## [3.9.0](https://github.com/tempestphp/tempest-framework/compare/v3.8.0..3.9.0)  —  2026-04-01
+## [3.10.0](https://github.com/tempestphp/tempest-framework/compare/v3.9.0..3.10.0)  —  2026-04-23
+
+### 🚨 Breaking changes
+
+- **core**: [**breaking**] move `#[Priority]` to `tempest/support` (#2116) ([657e1da](https://github.com/tempestphp/tempest-framework/commit/657e1dac19d1ddfa3257364e510bd71a76152178))
+- **database**: [**breaking**] allow setting char size (#2087) ([e19437e](https://github.com/tempestphp/tempest-framework/commit/e19437e25c557d4b6cc859ccc98387c0cdc695aa))
+- **view**: [**breaking**] fix inconsistent fallthrough attributes and introduce apply attribute for full control (#2092) ([92394ea](https://github.com/tempestphp/tempest-framework/commit/92394eaa4818aefdf129c564fc9f23d2e8cb5958))
+
+### 🚀 Features
+
+- **auth**: add scopeSeparator parameter to GenericOAuthConfig (#2119) ([ab66cb2](https://github.com/tempestphp/tempest-framework/commit/ab66cb2fb08b5b5973239652df997fa47d307458))
+- **database**: add current to date (#2100) ([f84cf41](https://github.com/tempestphp/tempest-framework/commit/f84cf416bd18c548db8bd6bc3108393069ab76de))
+- **database**: autodetect char size by default value (#2099) ([6c8b9fe](https://github.com/tempestphp/tempest-framework/commit/6c8b9fefdf1a7c7cde6cecdfe9ae902883cc05c7))
+- **database**: add support for `whereHas` inside where groups (#2121) ([851048a](https://github.com/tempestphp/tempest-framework/commit/851048a8932838fbaf31e09962f11a48c84763dd))
+- **database**: add option to get underlying query for property relation (#2102) ([6398523](https://github.com/tempestphp/tempest-framework/commit/6398523f46f89560548780101c7ddd1dcb679627))
+- **discovery**: improve autoloading of discovery paths (#2114) ([9d11469](https://github.com/tempestphp/tempest-framework/commit/9d11469f3c62f2922865eb2a80f7109cf15eee9a))
+- **support**: withKeys and withoutKeys methods for manipulatesarray (#2094) ([61c0c3f](https://github.com/tempestphp/tempest-framework/commit/61c0c3fa8006c54d857320338379df29433a789a))
+
+### 🐛 Bug fixes
+
+- **core**: report deprecations without throwing (#2126) ([a75b008](https://github.com/tempestphp/tempest-framework/commit/a75b00817f60d1313122a4d67b5ccd590323443b))
+- **database**: fix inserting multiple properties pointing to the same table (#2101) ([ba245c7](https://github.com/tempestphp/tempest-framework/commit/ba245c77381cab2baba36399abdb6ef711ac6db6))
+- **database**: make `orderBy` support all dialects (#2120) ([3340f95](https://github.com/tempestphp/tempest-framework/commit/3340f95c94d48984b6105e00b4c867a0db0ebe1d))
+- **discovery**: support PSR-4 paths defined as arrays in composer.json (#2112) ([f527f4c](https://github.com/tempestphp/tempest-framework/commit/f527f4c1b96acac2a380c50a4daff11518c8dc5d))
+- **mapper**: casters return null for empty input on nullable properties (#2107) ([dec69df](https://github.com/tempestphp/tempest-framework/commit/dec69df1a37596e3b1d995db486e3e5b3c9a3d1c))
+- **view**: data attribute handling for x-component (#2109) ([e80f5a7](https://github.com/tempestphp/tempest-framework/commit/e80f5a7c82f6296d6b0b9892c84abfefed9fa962))
+
+
+## [3.9.0](https://github.com/tempestphp/tempest-framework/compare/v3.8.0..v3.9.0)  —  2026-04-01
 
 ### 🚨 Breaking changes
 
