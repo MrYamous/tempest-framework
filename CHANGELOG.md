@@ -2,7 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
-## [3.11.0](https://github.com/tempestphp/tempest-framework/compare/v3.10.0..3.11.0)  —  2026-05-22
+## [3.11.1](https://github.com/tempestphp/tempest-framework/compare/v3.11.0..3.11.1)  —  2026-05-27
+
+### 🐛 Bug fixes
+
+- **router**: preserve http status during development exceptions (#2133) ([e0046b2](https://github.com/tempestphp/tempest-framework/commit/e0046b278abb97d758398cfa5fafaccbd6204e6d))
+
+
+## [3.11.0](https://github.com/tempestphp/tempest-framework/compare/v3.10.0..v3.11.0)  —  2026-05-22
 
 ### 🚀 Features
 
