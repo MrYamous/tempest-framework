@@ -2,7 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
-## [3.11.1](https://github.com/tempestphp/tempest-framework/compare/v3.11.0..3.11.1)  —  2026-05-27
+## [3.11.2](https://github.com/tempestphp/tempest-framework/compare/v3.11.1..3.11.2)  —  2026-05-28
+
+### 🐛 Bug fixes
+
+- **core**: generate discovery and signing key when installing the framework (#2139) ([7c8e2db](https://github.com/tempestphp/tempest-framework/commit/7c8e2db5c9e9dc134f1717c9f9027de4efdfdee8))
+
+
+## [3.11.1](https://github.com/tempestphp/tempest-framework/compare/v3.11.0..v3.11.1)  —  2026-05-27
 
 ### 🐛 Bug fixes
 
