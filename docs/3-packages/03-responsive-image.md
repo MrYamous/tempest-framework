@@ -6,7 +6,7 @@ description: "A standalone package to render responsive images"
 
 ## Quickstart
 
-```
+```console
 composer require tempest/responsive-image
 ```
 

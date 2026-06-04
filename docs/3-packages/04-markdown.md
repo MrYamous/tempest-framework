@@ -7,7 +7,7 @@ description: "Fast and extensible Markdown in PHP"
 
 ## Quickstart
 
-```sh
+```console
 composer require tempest/markdown
 ```
 
