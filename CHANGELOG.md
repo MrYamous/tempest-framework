@@ -2,7 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
-## [3.11.3](https://github.com/tempestphp/tempest-framework/compare/v3.11.2..3.11.3)  —  2026-06-03
+## [3.11.4](https://github.com/tempestphp/tempest-framework/compare/v3.11.3..3.11.4)  —  2026-06-05
+
+### ⚡ Performance
+
+- **auth**: memoize current authenticatable (#2144) ([ed1b68f](https://github.com/tempestphp/tempest-framework/commit/ed1b68ffe6a19f617540d5352711e26d8709c653))
+
+
+## [3.11.3](https://github.com/tempestphp/tempest-framework/compare/v3.11.2..v3.11.3)  —  2026-06-03
 
 ### 🐛 Bug fixes
 
@@ -243,7 +250,7 @@ All notable changes to this project will be documented in this file.
 - **view**: [**breaking**] improved view component rendering (#1980) ([b830a16](https://github.com/tempestphp/tempest-framework/commit/b830a1601c5d8d3ecd2502e3b49be2e8f6078500))
 
 
-## [3.1.0](https://github.com/tempestphp/tempest-framework/compare/v3.0.1..v3.1.0)  —  2026-02-16
+## [3.0.2](https://github.com/tempestphp/tempest-framework/compare/v3.0.1..v3.0.2)  —  2026-02-16
 
 ### 🚨 Breaking changes
 
@@ -1178,7 +1185,7 @@ All notable changes to this project will be documented in this file.
 - rector (#680) ([7fdff1d](https://github.com/tempestphp/tempest-framework/commit/7fdff1d7be48ab91fb35e1a07434ae54ef47781c))
 
 
-## [1.0.0-alpha.3](https://github.com/tempestphp/tempest-framework/compare/v1.0.0-alpha.2..v1.0.0-alpha.3)  —  2024-10-30
+## [1.0.0-alpha.3](https://github.com/tempestphp/tempest-framework/compare/v1.0.0-alpha.2..v1.0.0-alpha.3)  —  2024-10-31
 
 ### 🚨 Breaking changes
 
