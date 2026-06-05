@@ -2,7 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
-## [3.11.4](https://github.com/tempestphp/tempest-framework/compare/v3.11.3..3.11.4)  —  2026-06-05
+## [3.11.5](https://github.com/tempestphp/tempest-framework/compare/v3.11.4..3.11.5)  —  2026-06-05
+
+### 🐛 Bug fixes
+
+- **validator**: improve validateObject and validateValueForProperty methods (#2130) ([df60cc7](https://github.com/tempestphp/tempest-framework/commit/df60cc7fe75fb3f8d3aaba72d78098d8619b2856))
+
+
+## [3.11.4](https://github.com/tempestphp/tempest-framework/compare/v3.11.3..v3.11.4)  —  2026-06-05
 
 ### ⚡ Performance
 
