@@ -2,7 +2,30 @@
 
 All notable changes to this project will be documented in this file.
 
-## [3.11.5](https://github.com/tempestphp/tempest-framework/compare/v3.11.4..3.11.5)  —  2026-06-05
+## [3.11.6](https://github.com/tempestphp/tempest-framework/compare/v3.11.5..3.11.6)  —  2026-06-06
+
+### 🚀 Features
+
+- **console**: ask to install completions during setup (#2152) ([b102c7f](https://github.com/tempestphp/tempest-framework/commit/b102c7fe7513675b96bbcdc892c4fb99e49a291c))
+
+### ⚡ Performance
+
+- **container**: cache dynamic initializer instances (#2153) ([dbef226](https://github.com/tempestphp/tempest-framework/commit/dbef226243be4fc7f59e3deb82f7e0c516862c87))
+- **database**: index migrations by name (#2155) ([c699ab8](https://github.com/tempestphp/tempest-framework/commit/c699ab834d421d13f092554fe749e3599d3ad026))
+- **event-bus**: cache event propagation check (#2157) ([a6dc8a1](https://github.com/tempestphp/tempest-framework/commit/a6dc8a100b5b3f16fa1b0f70127c4aeaf171a99f))
+- **http**: use keyed request header lookup (#2158) ([1a0860d](https://github.com/tempestphp/tempest-framework/commit/1a0860d2f9ef2eafa025562ee39b2b631e5c6fcd))
+- **icon**: skip redundant cache read (#2160) ([88594df](https://github.com/tempestphp/tempest-framework/commit/88594dfa8a75148b71c9a34f4d2fe2b5adbd293c))
+- **intl**: avoid parser offset scans (#2161) ([027a76f](https://github.com/tempestphp/tempest-framework/commit/027a76f80b3a85ec8dafd27a415b2423b0b84e91))
+- **intl**: lazy load catalog fallback (#2162) ([70e2df1](https://github.com/tempestphp/tempest-framework/commit/70e2df15728c65600b4f30f1ffae6b3359182a40))
+
+### 🐛 Bug fixes
+
+- **auth**: reject missing oauth state (#2163) ([3e4c725](https://github.com/tempestphp/tempest-framework/commit/3e4c7256c75bf81a6c74d44c35a39342a92fa827))
+- **database**: delete rolled back migration records (#2164) ([bf8881e](https://github.com/tempestphp/tempest-framework/commit/bf8881e4795aac2f95b67fea169e6d9e9ebfad47))
+- **http**: correct header presence check for falsy values (#2159) ([48b7813](https://github.com/tempestphp/tempest-framework/commit/48b78138cf2d1985e5708bd880f2bde3b2fab999))
+
+
+## [3.11.5](https://github.com/tempestphp/tempest-framework/compare/v3.11.4..v3.11.5)  —  2026-06-05
 
 ### 🐛 Bug fixes
 
@@ -257,7 +280,7 @@ All notable changes to this project will be documented in this file.
 - **view**: [**breaking**] improved view component rendering (#1980) ([b830a16](https://github.com/tempestphp/tempest-framework/commit/b830a1601c5d8d3ecd2502e3b49be2e8f6078500))
 
 
-## [3.0.2](https://github.com/tempestphp/tempest-framework/compare/v3.0.1..v3.0.2)  —  2026-02-16
+## [3.1.0](https://github.com/tempestphp/tempest-framework/compare/v3.0.1..v3.1.0)  —  2026-02-16
 
 ### 🚨 Breaking changes
 
@@ -1192,7 +1215,7 @@ All notable changes to this project will be documented in this file.
 - rector (#680) ([7fdff1d](https://github.com/tempestphp/tempest-framework/commit/7fdff1d7be48ab91fb35e1a07434ae54ef47781c))
 
 
-## [1.0.0-alpha.3](https://github.com/tempestphp/tempest-framework/compare/v1.0.0-alpha.2..v1.0.0-alpha.3)  —  2024-10-31
+## [1.0.0-alpha.3](https://github.com/tempestphp/tempest-framework/compare/v1.0.0-alpha.2..v1.0.0-alpha.3)  —  2024-10-30
 
 ### 🚨 Breaking changes
 
