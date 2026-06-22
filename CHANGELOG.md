@@ -2,7 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
-## [3.11.7](https://github.com/tempestphp/tempest-framework/compare/v3.11.6..3.11.7)  —  2026-06-16
+## [3.11.8](https://github.com/tempestphp/tempest-framework/compare/v3.11.7..3.11.8)  —  2026-06-22
+
+### 🐛 Bug fixes
+
+- **database**: use correct return type for IsDatabaseModel::resolve (#2178) ([b01cd64](https://github.com/tempestphp/tempest-framework/commit/b01cd64d22b65a622a16bf504c4429b38e65f583))
+- **discovery**: ignore duplicate pest tests during discovery (#2177) ([86e87b4](https://github.com/tempestphp/tempest-framework/commit/86e87b4f2989eae6c713bdaecd5ba415495c70c0))
+
+
+## [3.11.7](https://github.com/tempestphp/tempest-framework/compare/v3.11.6..v3.11.7)  —  2026-06-16
 
 ### 🚀 Features
 
