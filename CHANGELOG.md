@@ -2,7 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
-## [3.11.9](https://github.com/tempestphp/tempest-framework/compare/v3.11.8..3.11.9)  —  2026-06-23
+## [3.12.0](https://github.com/tempestphp/tempest-framework/compare/v3.11.9..3.12.0)  —  2026-06-23
+
+### 🚀 Features
+
+- **testing**: add model factories (#2182) ([4a412ce](https://github.com/tempestphp/tempest-framework/commit/4a412ce7f2a2e402f69f0b6a31f75beecce6d3ca))
+
+### 🐛 Bug fixes
+
+- **database**: model inspector `getSelectFields` returns duplicates (#2183) ([ab45889](https://github.com/tempestphp/tempest-framework/commit/ab458895a86904b891da0ab17363a5ca44c6f26f))
+
+
+## [3.11.9](https://github.com/tempestphp/tempest-framework/compare/v3.11.8..v3.11.9)  —  2026-06-23
 
 ### 🚀 Features
 
@@ -306,7 +317,7 @@ All notable changes to this project will be documented in this file.
 - **view**: [**breaking**] improved view component rendering (#1980) ([b830a16](https://github.com/tempestphp/tempest-framework/commit/b830a1601c5d8d3ecd2502e3b49be2e8f6078500))
 
 
-## [3.0.2](https://github.com/tempestphp/tempest-framework/compare/v3.0.1..v3.0.2)  —  2026-02-16
+## [3.1.0](https://github.com/tempestphp/tempest-framework/compare/v3.0.1..v3.1.0)  —  2026-02-16
 
 ### 🚨 Breaking changes
 
@@ -1241,7 +1252,7 @@ All notable changes to this project will be documented in this file.
 - rector (#680) ([7fdff1d](https://github.com/tempestphp/tempest-framework/commit/7fdff1d7be48ab91fb35e1a07434ae54ef47781c))
 
 
-## [1.0.0-alpha.3](https://github.com/tempestphp/tempest-framework/compare/v1.0.0-alpha.2..v1.0.0-alpha.3)  —  2024-10-31
+## [1.0.0-alpha.3](https://github.com/tempestphp/tempest-framework/compare/v1.0.0-alpha.2..v1.0.0-alpha.3)  —  2024-10-30
 
 ### 🚨 Breaking changes
 
