@@ -2,7 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
-## [3.11.8](https://github.com/tempestphp/tempest-framework/compare/v3.11.7..3.11.8)  —  2026-06-22
+## [3.11.9](https://github.com/tempestphp/tempest-framework/compare/v3.11.8..3.11.9)  —  2026-06-23
+
+### 🚀 Features
+
+- **framework**: add optional AGENTS.md installer (#2181) ([37766a0](https://github.com/tempestphp/tempest-framework/commit/37766a079fcb64c8e09b4844063cb1aa10805036))
+
+
+## [3.11.8](https://github.com/tempestphp/tempest-framework/compare/v3.11.7..v3.11.8)  —  2026-06-22
 
 ### 🐛 Bug fixes
 
