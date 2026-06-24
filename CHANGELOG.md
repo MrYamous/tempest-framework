@@ -2,7 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
-## [3.12.2](https://github.com/tempestphp/tempest-framework/compare/v3.12.1..3.12.2)  —  2026-06-24
+## [3.12.3](https://github.com/tempestphp/tempest-framework/compare/v3.12.2..3.12.3)  —  2026-06-24
+
+### 🚀 Features
+
+- **testing**: factory datetime support (#2186) ([4d03d86](https://github.com/tempestphp/tempest-framework/commit/4d03d8613da7cf199944b388876087b7559ada86))
+
+
+## [3.12.2](https://github.com/tempestphp/tempest-framework/compare/v3.12.1..v3.12.2)  —  2026-06-24
 
 ### 🚀 Features
 
