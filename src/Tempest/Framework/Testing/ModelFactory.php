@@ -2,7 +2,9 @@
 
 namespace Tempest\Framework\Testing;
 
+use DateTime as PHPDateTime;
 use Tempest\Database\PrimaryKey;
+use Tempest\DateTime\DateTime;
 use Tempest\Reflection\PropertyReflector;
 
 use function Tempest\Mapper\map;
@@ -114,6 +116,14 @@ final class ModelFactory
 
         if ($type->matches(PrimaryKey::class)) {
             return null;
+        }
+
+        if ($type->matches(DateTime::class)) {
+            return DateTime::now()->plusHours(random_int(-24, 24));
+        }
+
+        if ($type->matches(PHPDateTime::class)) {
+            return DateTime::now()->plusHours(random_int(-24, 24))->toNativeDateTime();
         }
 
         if ($type->isEnum()) {

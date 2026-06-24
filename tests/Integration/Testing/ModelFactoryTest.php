@@ -4,6 +4,7 @@ namespace Tests\Tempest\Integration\Testing;
 
 use PHPUnit\Framework\Attributes\Test;
 use Tempest\Database\Migrations\CreateMigrationsTable;
+use Tempest\DateTime\DateTime;
 use Tests\Tempest\Fixtures\Migrations\CreateAuthorTable;
 use Tests\Tempest\Fixtures\Migrations\CreateBookTable;
 use Tests\Tempest\Fixtures\Migrations\CreatePublishersTable;
@@ -170,9 +171,24 @@ final class ModelFactoryTest extends FrameworkIntegrationTestCase
 
         $this->assertInstanceOf(AuthorType::class, $author->type);
     }
+
+    #[Test]
+    public function test_with_datetime(): void
+    {
+        $withDateTime = factory(WithDateTime::class)->make();
+
+        $this->assertInstanceOf(DateTime::class, $withDateTime->tempestDate);
+        $this->assertInstanceOf(\DateTimeImmutable::class, $withDateTime->phpDate);
+    }
 }
 
 class AuthorWithEnum
 {
     public AuthorType $type;
+}
+
+class WithDateTime
+{
+    public DateTime $tempestDate;
+    public \DateTimeImmutable $phpDate;
 }
