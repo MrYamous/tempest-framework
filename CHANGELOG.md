@@ -2,7 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
-## [3.12.3](https://github.com/tempestphp/tempest-framework/compare/v3.12.2..3.12.3)  —  2026-06-24
+## [3.13.0](https://github.com/tempestphp/tempest-framework/compare/v3.12.3..3.13.0)  —  2026-06-25
+
+### 🚀 Features
+
+- **auth**: add middleware and route decorator to auth installer (#2187) ([527f0ae](https://github.com/tempestphp/tempest-framework/commit/527f0ae16f94fcbea0ff5b3301ab50ae6f49228c))
+
+
+## [3.12.3](https://github.com/tempestphp/tempest-framework/compare/v3.12.2..v3.12.3)  —  2026-06-24
 
 ### 🚀 Features
 
