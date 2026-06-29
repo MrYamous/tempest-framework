@@ -2,7 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
-## [3.13.0](https://github.com/tempestphp/tempest-framework/compare/v3.12.3..3.13.0)  —  2026-06-25
+## [3.13.1](https://github.com/tempestphp/tempest-framework/compare/v3.13.0..3.13.1)  —  2026-06-29
+
+### 🐛 Bug fixes
+
+- **intl**: support using the translator without an event bus (#2193) ([442967e](https://github.com/tempestphp/tempest-framework/commit/442967e8c216cb001c8d7cd9c2a1d2cda28b9a8b))
+
+
+## [3.13.0](https://github.com/tempestphp/tempest-framework/compare/v3.12.3..v3.13.0)  —  2026-06-25
 
 ### 🚀 Features
 
