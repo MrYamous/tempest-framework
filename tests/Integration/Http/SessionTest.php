@@ -138,4 +138,16 @@ final class SessionTest extends FrameworkIntegrationTestCase
 
         $this->assertEmpty($this->session->all());
     }
+
+    #[Test]
+    public function test_session_is_reset(): void
+    {
+        $originalSession = $this->container->get(Session::class);
+
+        $this->container->reset();
+
+        $newSession = $this->container->get(Session::class);
+
+        $this->assertNotSame($originalSession, $newSession);
+    }
 }
