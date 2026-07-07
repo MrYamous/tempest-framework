@@ -2,7 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
-## [3.13.1](https://github.com/tempestphp/tempest-framework/compare/v3.13.0..3.13.1)  —  2026-06-29
+## [3.13.2](https://github.com/tempestphp/tempest-framework/compare/v3.13.1..3.13.2)  —  2026-07-07
+
+### 🚀 Features
+
+- **validation**: allow validation failures with messages (#2196) ([8838c1e](https://github.com/tempestphp/tempest-framework/commit/8838c1ecb7bf585b2e176d1163cf643c22999b82))
+
+### 🐛 Bug fixes
+
+- **router**: use `Json\encode` for encoding when sending json responses (#2199) ([97a7811](https://github.com/tempestphp/tempest-framework/commit/97a78116e23d5cb8a23a2dfb66f018c9bfb74e42))
+- **session**: age flash values at the start of the request (#2198) ([9e4a7eb](https://github.com/tempestphp/tempest-framework/commit/9e4a7eb7e0e1effc474ede6172d9291c2d75a1e7))
+
+
+## [3.13.1](https://github.com/tempestphp/tempest-framework/compare/v3.13.0..v3.13.1)  —  2026-06-29
 
 ### 🐛 Bug fixes
 
