@@ -2,7 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
-## [3.13.2](https://github.com/tempestphp/tempest-framework/compare/v3.13.1..3.13.2)  —  2026-07-07
+## [3.14.0](https://github.com/tempestphp/tempest-framework/compare/v3.13.2..3.14.0)  —  2026-07-07
+
+### 🚨 Breaking changes
+
+- **core**: [**breaking**] worker mode support (#2172) ([9b76313](https://github.com/tempestphp/tempest-framework/commit/9b7631315a67f90c2874f420bd34f740f7ca3c35))
+
+
+## [3.13.2](https://github.com/tempestphp/tempest-framework/compare/v3.13.1..v3.13.2)  —  2026-07-07
 
 ### 🚀 Features
 
