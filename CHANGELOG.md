@@ -2,7 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
-## [3.14.0](https://github.com/tempestphp/tempest-framework/compare/v3.13.2..3.14.0)  —  2026-07-07
+## [3.14.1](https://github.com/tempestphp/tempest-framework/compare/v3.14.0..3.14.1)  —  2026-07-08
+
+### 🐛 Bug fixes
+
+- **router**: make exception page render in sandboxed/insecure environments (#2200) ([183ee19](https://github.com/tempestphp/tempest-framework/commit/183ee1994d6616c2dcd0f8dbd4890d21da26c9ff))
+
+
+## [3.14.0](https://github.com/tempestphp/tempest-framework/compare/v3.13.2..v3.14.0)  —  2026-07-07
 
 ### 🚨 Breaking changes
 
