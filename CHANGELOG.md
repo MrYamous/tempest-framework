@@ -2,7 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
-## [3.14.1](https://github.com/tempestphp/tempest-framework/compare/v3.14.0..3.14.1)  —  2026-07-08
+## [3.14.2](https://github.com/tempestphp/tempest-framework/compare/v3.14.1..3.14.2)  —  2026-07-15
+
+### 🚀 Features
+
+- **command-bus**: support async command handlers (#2208) ([a76b3d9](https://github.com/tempestphp/tempest-framework/commit/a76b3d9fb427de7a454dd70e08fb14ef9d5dac53))
+- **validation**: include error messages in ValidationFailed exception message (#2203) ([a919dec](https://github.com/tempestphp/tempest-framework/commit/a919dec4b485a217888badd16ee5b5b307a1cf53))
+
+### 🐛 Bug fixes
+
+- **view**: escape resolved expression attribute values (#2209) ([28218fb](https://github.com/tempestphp/tempest-framework/commit/28218fb63759bc2a359b3180b16bf8750a1775a8))
+
+
+## [3.14.1](https://github.com/tempestphp/tempest-framework/compare/v3.14.0..v3.14.1)  —  2026-07-08
 
 ### 🐛 Bug fixes
 
