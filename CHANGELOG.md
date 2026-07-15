@@ -2,7 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
-## [3.14.2](https://github.com/tempestphp/tempest-framework/compare/v3.14.1..3.14.2)  —  2026-07-15
+## [3.14.3](https://github.com/tempestphp/tempest-framework/compare/v3.14.2..3.14.3)  —  2026-07-15
+
+### 🚨 Breaking changes
+
+- **router**: [**breaking**] block all cross-site unsafe requests when using `PreventCrossSiteRequestsMiddleware` (#2210) ([64a5186](https://github.com/tempestphp/tempest-framework/commit/64a5186a4b49ebef8c881aa4a2ab222435f5b89f))
+
+
+## [3.14.2](https://github.com/tempestphp/tempest-framework/compare/v3.14.1..v3.14.2)  —  2026-07-15
 
 ### 🚀 Features
 
