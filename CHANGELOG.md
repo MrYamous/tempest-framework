@@ -2,7 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
-## [3.14.3](https://github.com/tempestphp/tempest-framework/compare/v3.14.2..3.14.3)  —  2026-07-15
+## [3.15.0](https://github.com/tempestphp/tempest-framework/compare/v3.14.3..3.15.0)  —  2026-07-16
+
+### 🚀 Features
+
+- **database**: persist hooked properties (#2215) ([f8b489b](https://github.com/tempestphp/tempest-framework/commit/f8b489b6c76e79928e2e916d0ab0e76a4470075d))
+- **http**: support QUERY method (#2212) ([d62342d](https://github.com/tempestphp/tempest-framework/commit/d62342d39c40c670042036ecbb0a2ab9fb75397e))
+
+
+## [3.14.3](https://github.com/tempestphp/tempest-framework/compare/v3.14.2..v3.14.3)  —  2026-07-15
 
 ### 🚨 Breaking changes
 
